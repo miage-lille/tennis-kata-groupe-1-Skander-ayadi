@@ -1,12 +1,56 @@
 import { Player } from './player';
 
-// Surely not the best choice
-export type Point = number;
+
+// Exerice 0: Write all type constructors of Points, Deuce, Forty and Advantage types.
+export type Love = {
+  kind: 'LOVE';
+};
+
+export type Fifteen = {
+  kind: 'FIFTEEN';
+};
+
+export type Thirty = {
+  kind: 'THIRTY';
+};
+
+export type Forty = {
+  kind: 'FORTY';
+  fortyData: FortyData;
+};
+
+export type Deuce = {
+  kind: 'DEUCE';
+};
+
+
+export type Advantage = {
+  kind: 'ADVANTAGE';
+  player: Player;
+};
 
 export type PointsData = {
   PLAYER_ONE: Point;
   PLAYER_TWO: Point;
 };
+
+export type Point = Love | Fifteen | Thirty;
+
+export type FortyData = {
+  player: Player; // The player who have forty points
+  otherPoint: Point; // Points of the other player
+};
+
+
+export type Game = {
+  kind: 'GAME';
+  player: Player; // Player has won
+};
+
+export const game = (winner: Player): Game => ({
+  kind: 'GAME',
+  player: winner,
+});
 
 export type Points = {
   kind: 'POINTS';
@@ -24,16 +68,9 @@ export const points = (
   },
 });
 
-// Exerice 0: Write all type constructors of Points, Deuce, Forty and Advantage types.
 
-export type Game = {
-  kind: 'GAME';
-  player: Player; // Player has won
-};
 
-export const game = (winner: Player): Game => ({
-  kind: 'GAME',
-  player: winner,
-});
 
-export type Score = Points | Game;
+export type Score = Points | Forty | Deuce | Advantage | Game;
+
+
